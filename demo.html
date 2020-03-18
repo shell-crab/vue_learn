@@ -9,6 +9,7 @@
 <body>
     <div id="app">
         <p>{{username}}</p>
+        <p>{{greet()}}</p>
     </div>
 </body>
 </html>
@@ -16,7 +17,12 @@
     let vm = new Vue({
         el: "#app",
         data: {
-            'username': 'shell'
+            'username': '宝贝猪猪'
+        },
+        methods: {
+            greet: function(){
+                return "晚上好！" + this.username
+            }
         }
     });
 </script>
