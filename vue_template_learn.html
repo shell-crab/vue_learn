@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>grammer of vue template</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    
 </head>
 <body>
     <div id='app'>
         <h1>{{username}}</h1>
-        <button v-on:click='change'>suprise</button>
-        <p v-html='code'></p>
-        <div></div>
-        <img v-bind:src="imgsrc" alt="">
+        <button @click='change'>suprise</button>
+        <div v-html='code'></div>
+        <img :src="imagesrc" alt="">
     </div>
 </body>
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
 <script>
-    let vm = new Vue({
+    new Vue({
         el: '#app',
         data: {
             'username': '黄猪猪',
             'code': "<a href='https://www.baidu.com/'>百度一下，你就知道！</a>",
-            'imgsrc': 'www.baidu.com/img/bd_logo1.png?qua=high&where=super'
+            'imagesrc': 'https://www.baidu.com/img/bd_logo1.png?qua=high&where=super'
         },
         methods: {
             change: function(){

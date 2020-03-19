@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue02</title>
+    <style>
+        .title{
+            font-size: 40px;
+            color: red;
+        }
+        .main_title{
+            font-weight: 80;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">中国，加油！</p>
+    <div id='app'>
+        <!-- <p v-bind:class='[class1, class2]'>china fighting!!!</p> -->
+        <!-- <p v-bind:class="{title:class1, main_title:class2}">hello world</p> -->
+        <!-- <p v-bind:style="{'backgroundColor': background}">hi</p> -->
+        <!-- <P v-bind:style='pcl'>嘟嘟嘟~</P> -->
+        <!-- <p :style='{color:color?"red":"blue"}'>{{username.split(" ").reverse().join(" ")}}</p> -->
+        <!-- <p v-if="weather == 'sun' " :style='pcl'>出去耍</p> -->
+        <!-- <p v-else-if="weather == 'rain' ">在家耍</p> -->
+        <!-- <p v-else>恰火锅</p> -->
+    </div>
+    <!-- <div id='login'>
+        <template v-if="logintype == 'username' ">
+            <label for="username">用户名</label>
+            <input type="text" placeholder='用户名' key='username'>
+        </template>
+        <template v-else-if="logintype == 'email'">
+            <label for="email">邮箱</label>
+            <input type="text" placeholder='邮箱' key='email'>
+        </template>
+        <button v-on:click="checkout">切换</button>
+    </div> -->
+    <div class='hi'>
+        <!-- <table>
+            <tr>
+                <th>序号</th>
+                <th>书名</th>
+                <th>作者</th>
+            </tr>
+            <tr v-for="(book,index) in books">
+                <td>{{index+1}}</td>
+                <td>{{book.name}}</td>
+                <td>{{book.auth}}</td>
+            </tr>
+        </table> -->
+        <div v-for='(value, key) in person'>
+            {{key}}:{{value}}
+        </div>
+    </div>
+    
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            // class1: 'title',
+            // class2: 'main_title'
+            class1: true,
+            class2: true,
+            background: 'red',
+            pcl: {
+                backgroundColor: 'pink',
+                'font-size': '60px'
+            },
+            username: 'world hello',
+            color: false,
+            weather: 'sun'
+        }
+    });
+    new Vue({
+        el: '#login',
+        data: {
+            logintype: 'username'
+        },
+        methods: {
+            checkout: function(){
+                this.logintype = this.logintype=='username'?'email':'username';
+            }
+        }
+    });
+    new Vue({
+        el: '.hi',
+        data: {
+            books: [
+                {
+                    name: 'python',
+                    auth: '龟叔'
+                },
+                {
+                    name: '凡心春水',
+                    auth: '冰心'
+                },
+                {
+                    name: '追风筝的人',
+                    auth: '啦啦啦'
+                }
+            ],
+            person: {
+                username: 'shell',
+                age: '16'
+            }
+        }
+    })
+</script>
