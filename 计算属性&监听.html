@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>computed&watch_learn</title>
+</head>
+<body>
+    <div id='app'>
+        <!-- <div>
+            <label for="">长：</label>
+            <input type="number" name="length" v-model:value="length">
+        </div>
+        <div>
+            <label for="">宽：</label>
+            <input type="number" name="weight" v-model:value="weight">
+        </div>
+        <div>
+            <label for="">面积：</label>
+            <input type="text" name="area" readonly v-bind:value="area">
+        </div> -->
+
+        <!-- <div>
+            <label for="">省：</label>
+            <input type="text" name="province" v-model:value="province">
+        </div>
+        <div>
+            <label for="">市：</label>
+            <input type="text" name="city" v-model:value="city">
+        </div>
+        <div>
+            <label for="">区：</label>
+            <input type="text" name="district" v-model:value="district">
+        </div>
+        <div>
+            <label for="">详细地址：</label>
+            <input type="text" name="address" v-model:value='address'>
+        </div> -->
+
+        <div>
+            <label for="">搜索</label>
+            <input type="text" name="keyword" v-model="keyword">
+        </div>
+        <div>
+            <p>结果:{{answer}}</p>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            length: 0,
+            weight: 0,
+            province: '',
+            city: '',
+            district: '',
+            answer: "",
+            keyword: ""
+        },
+        computed:{
+            area: function(){
+                return this.length * this.weight
+            },
+            address: {
+                get: function(){
+                    var result = "";
+                    if(this.province){
+                        result = this.province + '省';    
+                    }
+                    if(this.city){
+                        result += this.city + '市';
+                    }
+                    if(this.district){
+                        result += this.district + '区';
+                    }
+                    // console.log(result)
+                    return result;
+                },
+                set: function(addr){
+                    // 广东省广州市天河区
+                    var result = addr.split(/省|市|区/)
+                    // console.log(result)
+                    if(result && result.length>0){
+                        this.province = result[0]
+                    }
+                    if(result && result.length>1){
+                        this.city = result[1]
+                    }
+                    if(result && result.length>2){
+                        this.district = result[2]
+                    }
+                }
+            },
+        },
+        watch:{
+            keyword: function(newvalue, oldvalue){
+                // console.log(newvalue),
+                // console.log(oldvalue)
+                this.answer = '加载中...'
+                // 定时器
+                setTimeout(() => {
+                    this.answer = newvalue
+                }, 1000);
+            }
+        }
+    })
+</script>

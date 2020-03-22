@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bind_learn</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <span >输入内容是:</span>
+        <p style="white-space: pre-line;">{{wbk}}</p>
+        <textarea name="wbk" v-model='wbk' cols="30" rows="10"></textarea> -->
+
+        <!-- <input type="checkbox" value="1" v-model="mname">
+        <label for="jacl">jack</label>
+        <input type="checkbox" value="2" v-model="mname">
+        <label for="">john</label>
+        <input type="checkbox" value="3" v-model="mname">
+        <label for="">evan</label>
+        <br>
+        <span>checked name: {{ mname }}</span> -->
+
+        <!-- <input type="radio" value="man" v-model:value='gender'>
+        <label for="">man</label>
+        <input type="radio" value="female" v-model:value='gender'>
+        <label for="">female</label>
+        <p style="white-space: pre-wrap;">{{gender}}</p> -->
+
+        <!-- <select name="" id="" v-model="choose">
+            <option disabled value="">请选择</option>
+            <option value="1">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <p>HERE: {{choose}}</p> -->
+
+        <input type="text" v-model.lazy.number.trim="gender">
+        <p>out: {{gender}}</p>
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            wbk: "",
+            mname: [],
+            gender: '',
+            choose: ''
+        }
+    })
+</script>
