@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <blog-post ></blog-post> -->
+        <blog-post :books="books"></blog-post>
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    Vue.component('blog-post', {
+        // 给组件添加属性
+        props: ['books'],
+        // 多行用``来包裹模板，模板内根元素必须只有一个
+        template: `
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>标题</th>
+            </tr>
+            <tr v-for="(book,index) in books" :value="books">
+                <td>{{index+1}}</td>
+                <td>{{book}}</td>
+            </tr>
+            <tr></tr>
+        </table>
+        `
+    })
+    new Vue({
+        el:"#app",
+        data: {
+            books: ['python', 'java', 'php']
+        }
+    })
+</script>

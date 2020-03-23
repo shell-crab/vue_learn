@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <book-list v-for="book in books" :ok="book" v-on:father="solve">
+
+        </book-list>
+        <div v-for="c in cbook">
+            {{c}}
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.component('book-list', {
+        props: ['ok'],
+        template: `
+        <div>
+            <span>{{ok.title}}</span>
+            <input type="checkbox" @click="oncheck">
+        </div>
+        `,
+        methods: {
+            oncheck: function(){
+                // console.log(123)
+                this.$emit('father', this.ok.title)
+            }
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {"title":"钢铁是怎样练成的？","id":1},
+                {"title":"AI会毁灭人类吗？","id":2},
+                {"title":"如何学好Vue！","id":3},
+            ],
+            cbook: [],
+        },
+        methods: {
+            solve: function(ok){
+                // console.log(ok)
+                // this.cbook.push(ok)
+                var index = this.cbook.indexOf(ok)
+                if(index >= 0){
+                    this.cbook.splice(index,1)
+                }else{
+                    this.cbook.push(ok)
+                }
+
+            }
+        }
+
+    })
+</script>
