@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <stepper v-model:value="goods_count"></stepper>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+     Vue.component('stepper',{
+        props:['count'],
+        model:{
+            event: 'count-changed',
+            prop: "count"
+        },
+        template:`
+        <div>
+            <button @click="sub">-</button>  
+            <span>{{count}}</span>
+            <button @click="add">+</button>  
+        </div>
+        `,
+        methods:{
+            sub:function(){
+                this.$emit("count-changed", this.count-1)
+            },
+            add:function(){
+                this.$emit("count-changed", this.count+1)
+            }
+        }
+    });
+
+    new Vue({
+        el: "#app",
+        data:{
+            "goods_count":0
+        }
+    })
+</script>

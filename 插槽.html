@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <nva-link :rew="url">
+            
+            <template v-slot:1>baidu</template>
+            <template>不给name属性我不会显示</template>
+        </nva-link>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.component('nva-link', {
+        props: ['rew'],
+        template: `
+        <a :href="rew">
+            <div>
+                <slot name='myname'>{{myname}}</slot>
+            </div>
+            <div>
+            <slot name='1'></slot>
+            </div>
+            <div>
+            <slot name='2'></slot>
+            </div>
+        </a>
+        `,
+        data: function(){
+            return {
+                myname:"shell"
+            }
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {
+            url: "https://www.baidu.com/"
+        }
+    })
+</script>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <container>
+            <template v-slot:header="headerProps">header: {{headerProps.value}}</template>
+            <template v-slot:footer="whatever">footer: {{whatever.value}}</template>
+        </container>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.component('container', {
+        template: `
+        <div>
+            <div>
+                <slot name="header" :value='navs'></slot>
+            </div>
+            <div>
+                <slot name="footer" :value='address'></slot>
+            </div>
+        </div>
+        `,
+        data: function(){
+            return {
+                navs: ['1', '2', '3'],
+                address: 'GD'
+            }
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {
+
+        }
+    })
+</script>
