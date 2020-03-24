@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p id="username">{{username}}</p>
+        <input type="text" v-model='username'>
+        <error-info :error='message' v-if="message"></error-info>
+        <button @click="Dmessage">删除错误</button>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    Vue.component('error-info', {
+        props: ['error'],
+        template:'<p style="color:red">{{error}}</p>',
+        // 7.vue实例或者是组件在被销毁之前执行的函数。在这一个函数中vue或者组件中所有
+        // 的属性都是可以使用的。
+        beforeDestroy(){
+            console.log('---beforeDestroy---')
+            console.log('删除前')
+            console.log('---beforeDestroy---')
+        },
+        // 8.destroyed:Vue实例或者组件被销毁后执行的，此时vue实例上所有东西都会解绑
+        // 所有事件都会被移除，所有子元素都会被销毁。
+    })
+
+    new Vue({
+        // 1、beforeCreate: vue或组件刚刚实例化，data,methods都还没有被创建
+        beforeCreate(){
+            console.log("---beforeCreate---")
+            console.log(this.username)
+            console.log(this.demo)
+            console.log("---beforeCreate---")
+        },
+        el: '#app',
+        data: {
+            username: 'shell',
+            message: '错误信息'
+        },
+        methods: {
+            demo: function(){
+                return "hello world"
+            },
+            Dmessage: function(){
+                this.message = ''
+            }
+        },
+        // 2、此时data和methods已经被创建，但模板还没有被编译
+        created(){
+            console.log("---created---")
+            console.log(this.username)
+            console.log(this.demo)
+            console.log("---created---")
+        },
+        // 3、此时模板已经被编译了，但是并没有被挂载到网页中
+        beforeMount(){
+            console.log('---beforeMount---')
+            console.log(document.getElementById('username').innerText)
+            console.log('---beforeMount---')
+        },
+        // 4、模板代码已经被加载到网页中了，此时创建期间所有事情都已经准备好了，网页开始运行了
+        mounted(){
+            console.log('---mount---')
+            console.log(document.getElementById('username').innerText)
+            console.log('---mount---')
+        },
+        // 5、在网页运行期间，data中的数据可能会进行更新。在这个阶段，数据只在data中更新了
+        // 还没有在模板中更新，因此网页中显示的还是之前的数据。
+        beforeUpdate(){
+            console.log('---beforeUpdate---')
+            console.log(document.getElementById('username').innerText)
+            console.log('---beforeUpdate---')
+        },
+        // 6.此时数据在data中更新了，在网页中也更新了
+        updated(){
+            console.log('---updata---')
+            console.log(document.getElementById('username').innerText)
+            console.log('---updata---')
+        },
+
+        
+    })
+</script>
