@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{message|choose}}
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    // 使用过滤器的方法1
+    // Vue.filter('choose', function(value){
+        // var newValue = value.replace('  ', '')
+        // return newValue
+    // })
+    new Vue({
+        el: '#app',
+        data: {
+            message: '过滤 空格'
+        },
+        // 使用过滤器的方法2
+        filters: {
+            choose: function(value){
+                // if (value) return '111'
+                // newValue = value.toString()
+                // return newValue.charAt(0).toUpperCase() + value.slice(1)
+                return value.replace(' ', '')
+            }
+        }
+    })
+</script>

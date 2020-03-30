@@ -14,10 +14,12 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script>
     Vue.component('stepper',{
+        // props定义的属性是给外面调用组件时使用的
         props: ["count"],
         model:{
-            // event代表什么情况下触发v-model行为
+            // event代表什么情况下触发v-model行为，这里是点击sub | add会触发
             event: 'hi',
+            // 使用v-model时，修改的属性
             prop: 'count'
         },
         template:`

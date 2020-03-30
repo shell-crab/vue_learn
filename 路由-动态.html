@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <router-link to='/'>首页</router-link>
+        <router-link to='/profile/123'>个人中心</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script>
+    var home = Vue.extend({template:"<h1>这是首页</h1>"})
+    var profile = Vue.extend({
+        template:"<h1>个人中心{{$route.params.userid}}</h1>",
+        mounted(){
+            // console.log(this.$route)
+            // console.log(this.$route.params.userid)
+            console.log(123)
+            if(this.$route.params.userid != '123'){
+                this.$router.replace('/404')
+            }
+        }
+        })
+    var notfind = Vue.extend({template: "<p>跑到火星了</p>"})    
+    var myrouter = new VueRouter({
+        routes: [
+            {path: '/', component:home},
+            {path: '/profile/:userid', component:profile},
+            {path: '*', component: notfind},
+            {path: '/404', component: notfind}
+        ]
+    })
+    new Vue({
+        el: '#app',
+        data: {
+
+        },
+        router: myrouter
+    })
+</script>

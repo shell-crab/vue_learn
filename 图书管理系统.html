@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>图书管理系统</h1>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <label>书名：</label>
+                    <input type="text" v-model="info.name" placeholder="name">
+                </div>
+                <div class="form-group">
+                    <label>作者：</label>
+                    <input type="text" v-model="info.author" placeholder="author">
+                </div>
+                <div class="form-group">
+                    <label>价格：</label>
+                    <input type="text" v-model="info.price" placeholder="price">
+                </div>
+                <div class="form-group">
+                    <label>搜索：</label>
+                    <input type="text" v-model="keywords" placeholder="搜索内容">
+                </div>
+                <button type="submit" class="btn btn-default" @click.prevent="add">提交</button>
+            </form>
+        
+            <table class="table">
+                <tr>
+                    <th>序号</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>价格</th>
+                    <th>添加时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="(book,index) in book_res">
+                    <td>{{index+1}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price}}</td>
+                    <td>{{book.atime}}</td>
+                    <td class="btn btn-danger" @click="del(index)">删除</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            books: [
+                {name:'python', author:'龟叔', price:'99', atime:new Date()},
+                {name:'小王子', author:'大王子', price:'69', atime:new Date()}
+            ],
+            info: {
+                name: '',
+                author: '',
+                priice: '',
+                atime: new Date(),
+            },
+            keywords: ''
+        },
+        methods: {
+            add: function(){
+                // JSON.stringify 转成字符串 JSON.parse 在转换成JS认识的代码
+                var newInfo = JSON.parse(JSON.stringify(this.info))
+                this.books.push(newInfo)
+                // console.log(this.info)
+                // 添加完后清空
+                this.info = {
+                    name: '',
+                    author: '',
+                    priice: '',
+                    atime: new Date()
+                }
+            },
+            del: function(index){
+                this.books.splice(index, 1)
+            }
+        },
+        computed:{
+            book_res(){
+                kw = this.keywords
+                if(kw){
+                    // item就是books里的每一条数据
+                    var search_book = this.books.filter(function(item){
+                        if(item.name.indexOf(kw) >= 0){
+                            return true
+                        }else{
+                            return false
+                        }
+                    })
+                    return search_book
+                }else{
+                    return this.books
+                }
+            }
+        }
+    })
+</script>
