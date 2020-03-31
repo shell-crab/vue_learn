@@ -8,6 +8,12 @@
 <body>
     <div id="app">
         <button @click="toPost">跳转</button>
+        <button @click="toHome">Home</button>
+        <button @click="toUser">user</button>
+        <button @click="toLogin">登录</button>
+        <button @click="toSearch">搜索</button>
+        <button @click="next">下一步</button>
+        <button @click="previous">上一步</button>
         <router-view></router-view>
     </div>
 </body>
@@ -16,9 +22,23 @@
 <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
 <script>
     var post = Vue.extend({template:'<h1>首页</h1>'})
+    var Home = Vue.extend({template: "<h1>this is home</h1>"})
+    var user = Vue.extend({
+        template: "<h1>用户{{$route.params.userid}}</h1>",
+        mounted(){
+            console.log(this.$route)
+            console.log(this.$router)
+        }
+        })
+    var login = Vue.extend({template: "<h1>用户名： <br>密码：</h1>"})
+    var navigation = Vue.extend({template: "<input type='text' placeholder='搜索'>"})
     var myrouter = new VueRouter({
         routes: [
-            {path: "/post", component: post}
+            {path: "/post", component: post},
+            {path: "/Home", component: Home},
+            {path: "/user/userid", component: user, name:"user"},
+            {path: "/signIn", component: login},
+            {path: "/navigation", component: navigation}
         ]
     })
     new Vue({
@@ -26,7 +46,27 @@
         router: myrouter,
         methods: {
             toPost: function(){
+                // 字符串
                 this.$router.push('/post')
+            },
+            toHome(){
+                // 对象
+                this.$router.push({path: 'Home'})
+            },
+            toUser(){
+                this.$router.push({name: 'user', params:{userid:"666"}})
+            },
+            toLogin(){
+                this.$router.push({path: "/signIn", query: {email: "123@haha.com"}})
+            },
+            toSearch(){
+                this.$router.replace("/navigation", "navigation")
+            },
+            next(){
+                this.$router.go(1)
+            },
+            previous(){
+                this.$router.go(-1)
             }
         }
     })

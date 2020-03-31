@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <router-view name="headerc"></router-view>
+        <router-view name="midc"></router-view>
+        <router-view name="footerc"></router-view>
+        <router-link :to="{name:'index'}">home</router-link>
+        <router-link :to="{name:'index2', params: {userid:123}}">user</router-link>
+        <router-view></router-view>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+<script>
+    var header = Vue.extend({template: "<h1>头部</h1>"})
+    var mid = Vue.extend({template: "<h1>中部</h1>"})
+    var footer = Vue.extend({template: "<h1>底部</h1>"})
+    var home = Vue.extend({template: "<h1>家</h1>"})
+    var user = Vue.extend({template: "<h1>user</h1>"})
+    var myrouter = new VueRouter({
+        routes: [
+            {
+                path: '/',
+                components: {
+                    headerc: header,
+                    midc: mid,
+                    footerc: footer
+                }
+            },
+            {path:"/home", name:"index", component: home},
+            {path:"/user/:userid", name: "index2", component: user}
+        ]
+    })
+    new Vue({
+        el: '#app',
+        router: myrouter
+    })
+</script>
