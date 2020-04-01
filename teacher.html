@@ -8,10 +8,13 @@
 </head>
 <body>
     <div id="app">
+        <!-- vue对象传递的参数需要{{}}包裹 -->
         <p>{{username}}</p>
     </div>
 <script>
+    // 创建vue对象，传递el参数，data可以用来传递参数
     let vm = new Vue({
+        // #就是id，指向body中id="app"
         el: "#app",
         data: {
             "username": "逻辑教育"

@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my_demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
 <body>
     <div id="app">
+        <!-- vue对象传递的参数需要{{}}包裹 -->
         <p>{{username}}</p>
         <p>{{greet()}}</p>
     </div>
 </body>
 </html>
+<!-- 无需下载，通过下方链接使用vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script>
+    // 创建vue对象，传递el参数，data可以用来传递参数
     let vm = new Vue({
+        // #就是id，指向body中id="app"
         el: "#app",
         data: {
             'username': '宝贝猪猪'
         },
+        // vue对象中通过methods存储函数，函数访问data中的变量需要通过this
+        // this表示当前对象
         methods: {
             greet: function(){
                 return "晚上好！" + this.username

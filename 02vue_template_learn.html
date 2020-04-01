@@ -9,8 +9,12 @@
 <body>
     <div id='app'>
         <h1>{{username}}</h1>
+        <!-- button标签点击后有惊喜，点击会调用vue对象中methods里的change方法 -->
         <button @click='change'>suprise</button>
+        <!-- v-html可以渲染原生的html代码 -->
         <div v-html='code'></div>
+        <!-- ":"是v-bind:的简写，如果想在html中绑定vue对象中的变量，通过v-bind来实现
+        即绑定对象的对象改变，显示值也会改变 -->
         <img :src="imagesrc" alt="">
     </div>
 </body>
@@ -28,7 +32,7 @@
         },
         methods: {
             change: function(){
-                this.username = '我爱你'
+                this.username = '我好稀饭你'
             }
         }
     })
