@@ -17,6 +17,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <script>
+    // ohh是自定义组件名，template是自定义组件的模板
+    // 在自定义组建中，如果需要返回数据，是函数的形式，return返回的是对象
     Vue.component('ohh', {
         template: '<button @click="count += 1">点击了{{count}}次</button>',
         data: function(){

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <h1>sort()函数的使用</h1>
+        <div v-for='l in language' :key="l">
+            <label for="">{{l}}</label>
+            <input type="text" :placeholder="l">
+        </div>
+        <!-- <p>@click是v-on:click的简写方式，当点击该按钮时调用change方法</p> -->
+        <button @click='change'>位置调换</button>
+
+
+        <h1 style="background-color: red;">触发视图更新</h1>
+        <div v-for="l in language">
+            <p>{{l}}</p>
+        </div>
+        <button @click='usePush'>push</button>
+        <button @click='updata'>change</button>
+        <button @click='usePop'>pop</button>
+        <button @click='useShift'>shift</button>
+
+
+        <h1 style="background-color: pink;">动态添加属性</h1>
+        <div v-for='i in person'>
+            <p>{{i}}</p>
+        </div>
+        <!-- 可以通过这种方式访问username变量 -->
+        <p>{{person.username}}</p>
+        <button @click='add'>add</button>
+
+
+        <h1 style="background-color: salmon;">传入event参数</h1>
+        <div>
+            <p>{{count}}</p>
+            <!-- 绑定事件可直接放到v-on/@ 后面 -->
+            <button @click="count += 1">加1</button>
+            <!-- 或是也是一个函数，并且可以传递参数 -->
+            <button v-on:click="sub(2, $event)" value='giao' name='ha'>减2</button>
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            language: ['python', 'java', 'C', 'PHP'],
+            person: {
+                username: 'shell'
+            },
+            count: 0
+        },
+        methods: {
+            change: function(){
+                // 伪随机
+                // sort让language中的字符串两两比较，return会返回正数、负数或0
+                // 返回负数时，a、b按照升序排列
+                // 返回正数时，a、b按照降序排列
+                // 返回0， 不变
+                this.language.sort(function (a, b){
+                    return 5 - Math.random()*10
+                })
+            },
+
+            // 触发视图更新
+            usePush: function(){
+                // 向尾部添加元素
+                this.language.push("够浪")
+            },
+
+            usePop: function(){
+                // 删除最后一个元素
+                this.language.pop()
+            },
+
+            useShift: function(){
+                // 删除数组第一个元素，unshift向数组开头位置添加一个元素
+                this.language.shift()
+            },
+
+            updata: function(){
+                // 替换---从下标0开始，将长度为2的数组元素替换为shell
+                // this.language.splice(0,2,'shell', 'crab')
+
+                // 删除---从下标0开始，删除长度为2
+                // this.language.splice(0,2)
+
+                // 添加---在下标1的位置添加shell
+                // this.language.splice(1,0,'shell')
+
+                // 将数组元素进行翻转
+                // this.language.reverse()
+
+                // 改变数组元素使用set()方法或splice()方法
+                Vue.set(this.language, 0, 'shell')
+            },
+
+            add: function(){
+                Vue.set(this.person, 'age', 18)
+            },
+
+            // 上面传递了event参数，这里就需要接受，event可以获取原生的DOM事件
+            sub: function(num, event){
+                this.count -= num
+                console.log(b.target.value)
+                console.log(b.target.name)
+            }
+        }
+    })
+</script>

@@ -44,14 +44,14 @@
             cbook: [],
         },
         methods: {
-            solve: function(ok){
+            solve: function(oks){
                 // console.log(ok)
                 // this.cbook.push(ok)
-                var index = this.cbook.indexOf(ok)
+                var index = this.cbook.indexOf(oks)
                 if(index >= 0){
                     this.cbook.splice(index,1)
                 }else{
-                    this.cbook.push(ok)
+                    this.cbook.push(oks)
                 }
 
             }

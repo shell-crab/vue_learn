@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bind_learn</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-model:value="xxx"的简写形式是v-model="xxx" -->
+        <h1>textarea绑定</h1>
+        <span >输入内容是:</span>
+        <p>{{wbk}}</p>
+        <textarea name="wbk" v-model='wbk' cols="30" rows="10"></textarea>
+
+        <h1>checkbox绑定</h1>
+        <input type="checkbox" value="jack" v-model="mname">
+        <label for="jacl">jack</label>
+        <input type="checkbox" value="john" v-model="mname">
+        <label for="">john</label>
+        <input type="checkbox" value="evan" v-model="mname">
+        <label for="">evan</label>
+        <br>
+        <span>checked name: {{ mname }}</span>
+
+        <h1>radio绑定</h1>
+        <input type="radio" value="man" v-model:value='gender'>
+        <label for="">man</label>
+        <input type="radio" value="female" v-model:value='gender'>
+        <label for="">female</label>
+        <p style="white-space: pre-wrap;">{{gender}}</p>
+
+        <h1>select绑定</h1>
+        <select name="" id="" v-model="choose">
+            <option disabled value="">请选择</option>
+            <option value="1">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <p>HERE: {{choose}}</p>
+
+        <h1>修饰符</h1>
+        <input type="text" v-model.lazy.number.trim="modify">
+        <p>out: {{modify}}</p>
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            wbk: "",
+            mname: [],
+            gender: '',
+            choose: '',
+            modify: ''
+        }
+    })
+</script>

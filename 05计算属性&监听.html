@@ -7,7 +7,9 @@
 </head>
 <body>
     <div id='app'>
-        <!-- <div>
+        <h1>计算属性</h1>
+        <!-- v-model是双向绑定，在页面中改变length的值，代码中也会改变 -->
+        <div>
             <label for="">长：</label>
             <input type="number" name="length" v-model:value="length">
         </div>
@@ -18,9 +20,12 @@
         <div>
             <label for="">面积：</label>
             <input type="text" name="area" readonly v-bind:value="area">
-        </div> -->
+        </div>
 
-        <!-- <div>
+
+        <h1>计算属性的set</h1>
+        <p>尝试输入广东、广州、天河 或是 在详细地址输入广东省广州市天河区</p>
+        <div>
             <label for="">省：</label>
             <input type="text" name="province" v-model:value="province">
         </div>
@@ -35,8 +40,10 @@
         <div>
             <label for="">详细地址：</label>
             <input type="text" name="address" v-model:value='address'>
-        </div> -->
+        </div>
 
+
+        <h1>监听属性</h1>
         <div>
             <label for="">搜索</label>
             <input type="text" name="keyword" v-model="keyword">
@@ -98,8 +105,8 @@
         },
         watch:{
             keyword: function(newvalue, oldvalue){
-                // console.log(newvalue),
-                // console.log(oldvalue)
+                console.log(newvalue)
+                console.log(oldvalue)
                 this.answer = '加载中...'
                 // 定时器
                 setTimeout(() => {
